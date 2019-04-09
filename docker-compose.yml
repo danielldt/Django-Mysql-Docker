@@ -1,0 +1,32 @@
+version: '3.7'
+volumes:
+  mysqldata:
+services:
+  web:
+    build:
+      context: .
+      dockerfile: dockerfile/dev/web/Dockerfile
+    environment:
+      - DJANGO_SETTINGS_MODULE=project.settings.dev
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./project:/project
+    ports:
+      - 8000:8000
+    command: python3 manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+  db:
+    image: mysql:5
+    #command: --default-authentication-plugin=mysql_native_password
+    #command: "--innodb_use_native_aio=0"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: reublydb
+      MYSQL_USER: reubly
+      MYSQL_PASSWORD: reubly112211
+    volumes:
+      - mysqldata:/var/lib/mysql
+    ports:
+      - "3306:3306"
