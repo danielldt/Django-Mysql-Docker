@@ -8,12 +8,10 @@ COPY ./project /project
 #Working Directory
 WORKDIR /project
 #install requirements
-RUN pip3 install --no-cache-dir -r requirements/dev.txt
+RUN pip3 install --no-cache-dir -r requirements/prod.txt
 #copy entrypoint for default configuration
 COPY ./dockerfile/dev/web/entrypoint.sh /entrypoint.sh
-COPY ./dockerfile/dev/web/wait-for-it.sh /wait-for-it.sh
 #make file executable
 RUN chmod +x /entrypoint.sh
 #set entrypoint
-ENTRYPOINT ["/wait-for-it.sh","db:3306","--"]
-CMD ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
