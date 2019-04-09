@@ -1,7 +1,7 @@
 # Django-Mysql-Docker
 A base django 2.2 framework with mysql as the database. Django restframework is also pre-installed.
 
-##Getting Started
+## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
 ### Quick Start
